@@ -1,8 +1,10 @@
 import cron from "node-cron";
-import { createTransport } from "nodemailer";
+import { createTransport, SendMailOptions } from "nodemailer";
 import { EMAIL, EMAIL_PASSWORD } from "../config/config";
+import { generatePDF } from "../utils/pdf";
 
-cron.schedule("0 17 * * *", () => {
+cron.schedule("0 23 * * *", async () => {
+  const path = await generatePDF();
   const transporter = createTransport({
     service: "gmail",
     auth: {
@@ -11,11 +13,17 @@ cron.schedule("0 17 * * *", () => {
     },
   });
 
-  const mailOptions = {
+  const mailOptions: SendMailOptions = {
     from: EMAIL,
     to: "rajpalom13274@gmail.com",
     subject: "Daily Report",
     text: "This is your daily report. Everything is running smoothly!",
+    attachments: [
+      {
+        filename: "report.pdf",
+        path,
+      },
+    ],
   };
 
   transporter

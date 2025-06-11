@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
 import saleModel from "../../models/sale";
 import { wss } from "../../server";
+import { CalculateMargin } from "../../utils/margin";
 
 export async function SaveSaleHandler(req: Request, res: Response) {
-  const { sku, quantity, workerId } = req.body;
-  if (!sku || !quantity || !workerId) {
+  const { sku, quantity, workerId, productPrice } = req.body;
+  if (!sku || !quantity || !workerId || !productPrice) {
     res.status(400).json({ status: false, error: "Missing required fields" });
     return;
   }
@@ -14,6 +15,7 @@ export async function SaveSaleHandler(req: Request, res: Response) {
       sku,
       quantity,
       workerId,
+      productPrice,
     }).save();
 
     if (!sale) {
@@ -31,7 +33,11 @@ export async function SaveSaleHandler(req: Request, res: Response) {
         );
       }
     });
+
     res.status(201).json({ status: true, sale });
+    setImmediate(() => {
+      CalculateMargin(sale._id);
+    });
   } catch (error) {
     console.error("Error saving sale:", error);
     res.status(500).json({ status: false, error: "Internal server error" });
