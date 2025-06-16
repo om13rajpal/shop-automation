@@ -1,4 +1,3 @@
-import { Schema } from "mongoose";
 import productModel from "../models/product";
 import saleModel from "../models/sale";
 
@@ -20,11 +19,7 @@ export async function CalculateMargin(id: any) {
   const totalCostPrice = sale.quantity * product.costPrice;
   const totalSalePrice = sale.quantity * sale.productPrice;
 
-  console.log('tpotal cost price', totalCostPrice)
-  console.log('tpotal sale price', totalSalePrice)
-
   const margin = totalSalePrice - totalCostPrice;
   sale.margin = margin;
-  console.log(`Calculated margin for sale ${sale._id}: ${margin}`);
   await sale.save();
 }

@@ -18,11 +18,7 @@ export async function GetUnverifiedWorkerHandler(req: Request, res: Response) {
     res.status(200).json({
       status: true,
       workers: workers.map((worker) => {
-        return {
-          id: worker._id,
-          phoneNumber: worker.phoneNumber,
-          name: worker.name,
-        };
+        return { name: worker.name, id: worker._id };
       }),
     });
   } catch (error) {

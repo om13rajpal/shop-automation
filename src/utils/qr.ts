@@ -3,14 +3,13 @@ import { Product } from "../models/product";
 
 export async function CreateQRCode(payload: Product) {
   const qr = qrcode
-    .toFile(`qr/${payload.name}.png`, JSON.stringify(payload), {
+    .toFile(`qr/${payload.sku}.png`, JSON.stringify(payload), {
       color: {
         dark: "#000000",
         light: "#FFFFFF",
       },
     })
-    .then((url) => {
-      console.log("QR Code file created");
+    .then(() => {
       return true;
     })
     .catch((err) => {
