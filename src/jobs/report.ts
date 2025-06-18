@@ -15,7 +15,7 @@ cron.schedule("0 23 * * *", async () => {
 
   const mailOptions: SendMailOptions = {
     from: EMAIL,
-    to: "rajpalom13274@gmail.com",
+    to: "in.skumar13@gmail.com, in.poonam@gmail.com",
     subject: "Daily Report",
     text: "This is your daily report. Everything is running smoothly!",
     attachments: [
