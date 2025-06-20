@@ -3,6 +3,7 @@ import "./jobs/report";
 import app from "./app";
 import { PORT } from "./config/config";
 import { WebSocketServer } from "ws";
+import axios from "axios"
 
 const server = http.createServer(app);
 export const wss = new WebSocketServer({ server });
@@ -21,4 +22,8 @@ wss.on("connection", (ws) => {
 
 server.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);
+
+  setInterval(async () => {
+    await axios.get("http://localhost:3000/");
+  }, 180000);
 });
