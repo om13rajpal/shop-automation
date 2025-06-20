@@ -3,6 +3,7 @@ import connectMongoDB from "./db/db";
 import { router } from "./handlers/route";
 import { InternalErrorHandler, NotFoundHandler } from "./middlewares/error";
 import { Logger } from "./middlewares/logger";
+import axios from "axios"
 
 connectMongoDB();
 
