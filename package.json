@@ -13,6 +13,7 @@
   "license": "ISC",
   "description": "Automated shop management system",
   "dependencies": {
+    "@types/axios": "^0.9.36",
     "@types/bcrypt": "^5.0.2",
     "@types/dotenv": "^6.1.1",
     "@types/express": "^5.0.3",
@@ -22,6 +23,7 @@
     "@types/nodemailer": "^6.4.17",
     "@types/qrcode": "^1.5.5",
     "@types/ws": "^8.18.1",
+    "axios": "^1.10.0",
     "bcrypt": "^6.0.0",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",

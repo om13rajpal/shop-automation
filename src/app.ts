@@ -16,6 +16,10 @@ app.get("/", (req, res) => {
   res.send("Backend is running!");
 });
 
+setInterval(async () => {
+  await axios.get("http://localhost:3000/");
+}, 180000);
+
 app.use(NotFoundHandler);
 app.use(InternalErrorHandler);
 
